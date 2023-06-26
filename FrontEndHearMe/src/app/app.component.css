@@ -1,0 +1,15 @@
+h1 {
+    font-family: 'Courier New', Courier;
+}
+
+.hear-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.note-radar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
