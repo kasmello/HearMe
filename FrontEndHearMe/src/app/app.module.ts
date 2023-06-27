@@ -6,6 +6,11 @@ import { HomeComponent } from './home/home.component';
 import { HearButtonComponent } from './hear-button/hear-button.component';
 import { NoteTextComponent } from './note-text/note-text.component';
 import { GaugeComponent } from './gauge/gauge.component';
+import { CommonModule } from '@angular/common';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -18,6 +23,8 @@ import { GaugeComponent } from './gauge/gauge.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    CommonModule,
+    PlotlyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

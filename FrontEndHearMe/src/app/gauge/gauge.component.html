@@ -1,2 +1,4 @@
-<div zingcha></div>
+<div *ngIf="visibility">
+    <plotly-plot [data]="graph.data" [layout]="graph.layout" id="chart"></plotly-plot>
+</div>
 

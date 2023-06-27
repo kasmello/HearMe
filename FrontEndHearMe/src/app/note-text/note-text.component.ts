@@ -45,6 +45,9 @@ export class NoteTextComponent {
   
 
   startAudioInput() {
+    this.noteName = "";
+    this.cents = 0;
+    let waitingSteps = 0;
     const updatePitch = (analyserNode, detector, input, sampleRate) => {
       analyserNode.getFloatTimeDomainData(input);
       const [newPitch, newClarity] = detector.findPitch(input, sampleRate);
@@ -55,6 +58,13 @@ export class NoteTextComponent {
         this.cents = calculateCentsOff(newPitch);
         // console.log(this.cents)
         console.log({pitch: this.pitch, clarity: this.clarity, note: this.noteName, cents: this.cents});
+        waitingSteps = 0;
+      } else {
+        waitingSteps += 1;
+        if (waitingSteps === 9) {
+          this.noteName = "";
+          this.cents = 0;
+        }
       }
       
       window.setTimeout(
