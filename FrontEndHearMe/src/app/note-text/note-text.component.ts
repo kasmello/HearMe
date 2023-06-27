@@ -57,13 +57,14 @@ export class NoteTextComponent {
         this.noteName = noteToNoteName(frequencyToNote(newPitch,440));
         this.cents = calculateCentsOff(newPitch);
         // console.log(this.cents)
-        console.log({pitch: this.pitch, clarity: this.clarity, note: this.noteName, cents: this.cents});
+        // console.log({pitch: this.pitch, clarity: this.clarity, note: this.noteName, cents: this.cents});
         waitingSteps = 0;
       } else {
         waitingSteps += 1;
         if (waitingSteps === 9) {
           this.noteName = "";
           this.cents = 0;
+          console.log("No singing detected, resetting")
         }
       }
       
