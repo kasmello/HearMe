@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { DataServiceService } from '../data-service.service';
-import * as PlotlyJS from 'plotly.js-dist-min';
 
 @Component({
   selector: 'app-gauge',
@@ -11,6 +10,7 @@ export class GaugeComponent {
   cent = 0;
   visibility?: boolean;
   prevVisibility?: boolean;
+  mode?: string;
   graph = {
     data: [
       {
@@ -53,6 +53,7 @@ export class GaugeComponent {
   
   constructor(private hearModeChange: DataServiceService) {
     this.prevVisibility = false;
+    this.mode = hearModeChange.mode;
   }
 
   ngOnInit() {
@@ -65,7 +66,7 @@ export class GaugeComponent {
               type: "indicator",
               mode: "gauge+number",
               value: value,
-              title: { text: "Cents off", font: { size: 24 }, color: "grey"},
+              title: { text: "Cents off", font: { size: this.mode==='desktop'?24:18 }, color: "grey"},
               gauge: {
                 axis: { range: [-50, 50], tickwidth: 1, tickcolor: "darkblue" },
                 bar: { color: value<-10 || value >10?"red":"green"},
@@ -90,8 +91,8 @@ export class GaugeComponent {
               }
             }
           ],
-          layout: {width: 600, 
-            height: 500, 
+          layout: {width: this.mode==='desktop'?600:400, 
+            height: this.mode==='desktop'?500:300, 
             plot_bgcolor: "rgba(0, 0, 0, 0)", 
             paper_bgcolor: "rgba(0, 0, 0, 0)",
             font: { color: value<-10||value>10?"red":"green", family: "Courier New" }}

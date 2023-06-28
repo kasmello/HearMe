@@ -51,17 +51,17 @@ export class NoteTextComponent {
     const updatePitch = (analyserNode, detector, input, sampleRate) => {
       analyserNode.getFloatTimeDomainData(input);
       const [newPitch, newClarity] = detector.findPitch(input, sampleRate);
-      if (newClarity > 0.95) {
+      if (newClarity > 0.98) {
         
         [this.pitch,this.clarity] = [newPitch,newClarity];
         this.noteName = noteToNoteName(frequencyToNote(newPitch,440));
         this.cents = calculateCentsOff(newPitch);
         // console.log(this.cents)
-        // console.log({pitch: this.pitch, clarity: this.clarity, note: this.noteName, cents: this.cents});
+        console.log({pitch: this.pitch, clarity: this.clarity, note: this.noteName, cents: this.cents});
         waitingSteps = 0;
       } else {
         waitingSteps += 1;
-        if (waitingSteps === 9) {
+        if (waitingSteps === 19) {
           this.noteName = "";
           this.cents = 0;
           console.log("No singing detected, resetting")
@@ -70,7 +70,7 @@ export class NoteTextComponent {
       
       window.setTimeout(
         () => updatePitch(analyserNode, detector, input, sampleRate),
-        100
+        50
       );
     }
     const noteToNoteName = (note) => {
@@ -94,11 +94,13 @@ export class NoteTextComponent {
     }
 
     if (typeof this.mediaStream === 'undefined') {
+      const audioContext = new AudioContext();
+      const analyserNode = audioContext.createAnalyser();
+      analyserNode.fftSize = 1024;
       navigator.mediaDevices.getUserMedia({audio: true})
       .then((stream) => {
         this.mediaStream = stream
-        const audioContext = new AudioContext();
-        const analyserNode = audioContext.createAnalyser();
+        
         audioContext.createMediaStreamSource(stream).connect(analyserNode);
         const detector = PitchDetector.forFloat32Array(analyserNode.fftSize);
         const input = new Float32Array(detector.inputLength);

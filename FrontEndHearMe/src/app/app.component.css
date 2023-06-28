@@ -14,7 +14,13 @@ h1 {
     align-items: center;
     justify-content: center;
 }
-.radar {
+
+.mobile-radar {
     position: absolute;
-    bottom: 5rem; /* Adjust spacing between items */
+    bottom: 2em;
+}
+  
+.desktop-radar {
+    position: absolute;
+    bottom: 6em;
 }

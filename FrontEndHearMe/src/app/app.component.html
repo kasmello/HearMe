@@ -4,5 +4,5 @@
 </div>
 <div class="note-radar">
     <app-note-text class="note-text"></app-note-text>
-    <app-gauge class="radar"></app-gauge>
+    <app-gauge [ngClass]="[mode === 'desktop' ? 'desktop-radar' : 'mobile-radar']"></app-gauge>
 </div>

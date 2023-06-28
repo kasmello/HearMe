@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,7 @@ import { GaugeComponent } from './gauge/gauge.component';
 import { CommonModule } from '@angular/common';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -24,7 +25,13 @@ PlotlyModule.plotlyjs = PlotlyJS;
     BrowserModule,
     AppRoutingModule,
     CommonModule,
-    PlotlyModule
+    PlotlyModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
