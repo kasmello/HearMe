@@ -90,6 +90,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/assets/icons/tuner.png",
               "src/manifest.webmanifest",
               "src/manifest.webmanifest",
               "src/manifest.webmanifest"

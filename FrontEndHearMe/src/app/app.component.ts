@@ -10,10 +10,10 @@ import { Title } from '@angular/platform-browser';
 })
 
 export class AppComponent {
-  title = 'Sing your heart out - in tune!'
+  title = 'FrontEndHearMe'
   mode = null;
   constructor (private titleService: Title, private hearMeMode: DataServiceService) {
-    this.titleService.setTitle('Sing your heart out - in tune!');
+    this.titleService.setTitle('🎤Sing your heart out - in tune!');
     this.mode = hearMeMode.mode
   }
   
