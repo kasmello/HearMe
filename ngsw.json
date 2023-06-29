@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1687955223586,
+  "timestamp": 1688035794292,
   "index": "https://kasmello.github.io/HearMe/index.html",
   "assetGroups": [
     {
@@ -11,9 +11,8 @@
         "ignoreVary": true
       },
       "urls": [
-        "https://kasmello.github.io/HearMe/favicon.ico",
         "https://kasmello.github.io/HearMe/index.html",
-        "https://kasmello.github.io/HearMe/main.beb0020a80e4220e.js",
+        "https://kasmello.github.io/HearMe/main.82e1e9f91185884a.js",
         "https://kasmello.github.io/HearMe/manifest.webmanifest",
         "https://kasmello.github.io/HearMe/polyfills.19945c66e73124f4.js",
         "https://kasmello.github.io/HearMe/runtime.4239732869019ca7.js",
@@ -53,9 +52,8 @@
     "https://kasmello.github.io/HearMe/assets/icons/icon-72x72.png": "279825a1ac4377032ae996a1832c641e33ccf1b6",
     "https://kasmello.github.io/HearMe/assets/icons/icon-96x96.png": "592885efcbfee27e5e20be4fa3043589390d2740",
     "https://kasmello.github.io/HearMe/assets/icons/tuner.png": "3914a9e8a3224962f4c9779f3a66dc756d161167",
-    "https://kasmello.github.io/HearMe/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://kasmello.github.io/HearMe/index.html": "a65c3a31a00bc4107f8b8bfe253c8ad7ab19d028",
-    "https://kasmello.github.io/HearMe/main.beb0020a80e4220e.js": "7aff148b1032b05d05dfb1d820c5c064e379b112",
+    "https://kasmello.github.io/HearMe/index.html": "a263a180888277ca9f36bfdc78f16f88bc1f4766",
+    "https://kasmello.github.io/HearMe/main.82e1e9f91185884a.js": "e8f63d1ff3e79a52bb317ab795d10e3918e6b878",
     "https://kasmello.github.io/HearMe/manifest.webmanifest": "8bf4edab666253bcc39c3738ef81dbf3a34298c7",
     "https://kasmello.github.io/HearMe/polyfills.19945c66e73124f4.js": "bf2ad9eb6efdd0ff6447bd159ee34d7bd7a3c43f",
     "https://kasmello.github.io/HearMe/runtime.4239732869019ca7.js": "ced86fcfcd0ea10295718359e82b611ae2e54a1a",
