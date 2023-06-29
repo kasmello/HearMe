@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,HostListener } from '@angular/core';
 import { DataServiceService } from '../data-service.service';
 import { PitchDetector } from 'pitchy';
 
@@ -19,9 +19,17 @@ export class NoteTextComponent {
 
   constructor(private hearModeChange: DataServiceService) {
     this.prevVisibility = false;
+    
   }
   
-
+  @HostListener('window:visibilitychange', ['$event'])
+  onVisibilityChange(event: Event): void {
+    if (document.hidden) {
+      // User switched tabs/apps
+      this.hearModeChange.turnOff();
+      // Add your logic here
+    }
+  }
 
   ngOnInit() {
     this.hearModeChange.currHearMode.subscribe((value: number) => {
@@ -43,7 +51,6 @@ export class NoteTextComponent {
     }
   }
 
-  
 
   startAudioInput() {
     this.noteName = "";
@@ -59,7 +66,7 @@ export class NoteTextComponent {
         this.noteName = noteToNoteName(frequencyToNote(newPitch,440));
         this.cents = calculateCentsOff(newPitch);
         // console.log(this.cents)
-        console.log({pitch: this.pitch, clarity: this.clarity, note: this.noteName, cents: this.cents});
+        // console.log({pitch: this.pitch, clarity: this.clarity, note: this.noteName, cents: this.cents});
         waitingSteps = 0;
       } else {
         waitingSteps += 1;
@@ -97,7 +104,7 @@ export class NoteTextComponent {
       return Math.floor( 1200 * Math.log( frequency / fClosest)/Math.log(2) );;
     }
 
-    // if (typeof this.mediaStream === 'undefined') {
+
     const audioContext = new AudioContext();
     const analyserNode = audioContext.createAnalyser();
     analyserNode.fftSize = 1024;
@@ -122,11 +129,12 @@ export class NoteTextComponent {
   }
   
   stopAudioInput() {
-    this.mediaStream.getTracks().forEach(track => track.stop())
-    // this.mediaStream.removeTrack(this.mediaStream.getTracks()[0])
-    console.log('Stopped!')
-    this.playing = false
-    
+    if (typeof this.mediaStream !== 'undefined') {
+      this.mediaStream.getTracks().forEach(track => track.stop())
+      // this.mediaStream.removeTrack(this.mediaStream.getTracks()[0])
+      console.log('Stopped!')
+      this.playing = false
+    }
   }
   
   

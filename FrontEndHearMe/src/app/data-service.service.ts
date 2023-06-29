@@ -25,6 +25,10 @@ export class DataServiceService {
     this.hearSubject.next(this.hearSubject.value === 0 ? 1 : 0);
   }
 
+  turnOff() {
+    this.hearSubject.next(0);
+  }
+
   changeCent(newCent) {
     this.centOff.next(newCent);
   }
