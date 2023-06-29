@@ -15,6 +15,7 @@ export class NoteTextComponent {
   mediaStream? : any;
   pitch? : number;
   clarity? : number;
+  playing = false;
 
   constructor(private hearModeChange: DataServiceService) {
     this.prevVisibility = false;
@@ -48,6 +49,7 @@ export class NoteTextComponent {
     this.noteName = "";
     this.cents = 0;
     let waitingSteps = 0;
+    this.playing = true;
     const updatePitch = (analyserNode, detector, input, sampleRate) => {
       analyserNode.getFloatTimeDomainData(input);
       const [newPitch, newClarity] = detector.findPitch(input, sampleRate);
@@ -69,7 +71,9 @@ export class NoteTextComponent {
       }
       
       window.setTimeout(
-        () => updatePitch(analyserNode, detector, input, sampleRate),
+        () => {if(this.playing) {
+          updatePitch(analyserNode, detector, input, sampleRate)
+        }},
         50
       );
     }
@@ -93,34 +97,35 @@ export class NoteTextComponent {
       return Math.floor( 1200 * Math.log( frequency / fClosest)/Math.log(2) );;
     }
 
-    if (typeof this.mediaStream === 'undefined') {
-      const audioContext = new AudioContext();
-      const analyserNode = audioContext.createAnalyser();
-      analyserNode.fftSize = 1024;
-      navigator.mediaDevices.getUserMedia({audio: true})
-      .then((stream) => {
-        this.mediaStream = stream
-        
-        audioContext.createMediaStreamSource(stream).connect(analyserNode);
-        const detector = PitchDetector.forFloat32Array(analyserNode.fftSize);
-        const input = new Float32Array(detector.inputLength);
-        updatePitch(analyserNode, detector, input, audioContext.sampleRate);
-        })
-      .catch((error) => {
-        console.error('Error accessing microphone:',error)
-      });
-    } else {
-      this.mediaStream.getTracks()[0].enabled=true
-    }
+    // if (typeof this.mediaStream === 'undefined') {
+    const audioContext = new AudioContext();
+    const analyserNode = audioContext.createAnalyser();
+    analyserNode.fftSize = 1024;
+    navigator.mediaDevices.getUserMedia({audio: true})
+    .then((stream) => {
+      this.mediaStream = stream
+      
+      audioContext.createMediaStreamSource(stream).connect(analyserNode);
+      const detector = PitchDetector.forFloat32Array(analyserNode.fftSize);
+      const input = new Float32Array(detector.inputLength);
+      updatePitch(analyserNode, detector, input, audioContext.sampleRate);
+      })
+    .catch((error) => {
+      console.error('Error accessing microphone:',error)
+    });
+    // } else {
+    //   this.mediaStream.getTracks().forEach(track => track.enabled=true)
+    // }
     // this.mediaStream.removeTrack(this.mediaStream.getTracks()[0])
     console.log('Started!')
     
   }
   
   stopAudioInput() {
-    this.mediaStream.getTracks()[0].enabled=false
+    this.mediaStream.getTracks().forEach(track => track.stop())
     // this.mediaStream.removeTrack(this.mediaStream.getTracks()[0])
     console.log('Stopped!')
+    this.playing = false
     
   }
   
