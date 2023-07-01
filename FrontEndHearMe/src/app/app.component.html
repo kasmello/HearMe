@@ -1,8 +1,11 @@
-<h1 style="text-align: center;">Hear Me</h1>
-<div class="hear-button">
-    <app-hear-button></app-hear-button>
-</div>
-<div class="note-radar">
-    <app-note-text class="note-text"></app-note-text>
-    <app-gauge [ngClass]="[mode === 'desktop' ? 'desktop-radar' : 'mobile-radar']"></app-gauge>
-</div>
+<body [ngClass]="dark? 'dark': 'light'">
+    <button mat-button color="accent" (click)="switchMode()">Toggle {{dark? "Light":"Dark"}} Mode</button>
+    <h1 [ngClass]="dark? 'dark-label': 'light-label'" style="text-align: center;">Hear Me</h1>
+    <div class="hear-button">
+        <app-hear-button></app-hear-button>
+    </div>
+    <div class="note-radar">
+        <app-note-text [ngClass]="dark? 'dark-label': 'light-label'" class="note-text"></app-note-text>
+        <app-gauge [ngClass]="[mode === 'desktop' ? 'desktop-radar' : 'mobile-radar']"></app-gauge>
+    </div>
+</body>

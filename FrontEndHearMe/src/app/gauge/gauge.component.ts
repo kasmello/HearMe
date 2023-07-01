@@ -96,7 +96,7 @@ export class GaugeComponent {
             height: this.mode==='desktop'?500:300, 
             plot_bgcolor: "rgba(0, 0, 0, 0)", 
             paper_bgcolor: "rgba(0, 0, 0, 0)",
-            font: { color: value<-10||value>10?"red":"green", family: "Courier New" }},
+            font: { color: value<-10||value>10?"red":"green", family: "Roboto" }},
           config: {displayModeBar: false}
         }
       }

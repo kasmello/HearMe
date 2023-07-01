@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { MatButtonModule } from '@angular/material/button'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -31,7 +33,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
-    })
+    }),
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
